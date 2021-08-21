@@ -112,7 +112,7 @@ class PD_ZDPG():
         actions = self.get_actions()
         actions_mu = self.get_actions_mu()
         #probe 1
-        _, fi_h, f_h, _ = self.env.step(actions, self.metrics_x, self.vec_H)
+        g_x, fi_h, f_h, _ = self.env.step(actions, self.metrics_x, self.vec_H)
         #for plotting
         g_vec_f, _, _, _ = self.env.step(actions, f_h, self.vec_H)
         #probe 2
@@ -124,8 +124,8 @@ class PD_ZDPG():
         self.update_theta(delta_f, delta_fi)
         #probe 3
         actions_mu = self.get_actions_mu()
-        sumrate, fi_uh_plus, f_uh_plus, self.vec_H = self.env.step(actions_mu, self.metrics_x, self.vec_H)
+        _, fi_uh_plus, f_uh_plus, self.vec_H = self.env.step(actions_mu, self.metrics_x, self.vec_H)
         #update lambda_ri and lambda_r
         self.lamda_r = np.maximum(0,self.lamda_r - self.update_lamda_r(f_uh_plus))
         self.lamda_ri = np.maximum(0,self.lamda_ri - self.update_lamda_ri(fi_uh_plus))
-        return g_vec_f, fi_h
+        return g_vec_f,  g_x, fi_h

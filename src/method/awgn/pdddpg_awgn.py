@@ -102,7 +102,7 @@ class PD_DDPG():
         self.metrics_x = np.maximum(0,self.metrics_x)
         actions = self.get_actions()
         #probe 1
-        _, fi_h, f_h, _ = self.env.step(actions, self.metrics_x, self.vec_H)
+        g_x, fi_h, f_h, _ = self.env.step(actions, self.metrics_x, self.vec_H)
         #for plotting
         g_vec_f, _, _, _ = self.env.step(actions, f_h, self.vec_H)
         #update theta
@@ -114,4 +114,4 @@ class PD_DDPG():
         self.lamda_ri = np.maximum(0,self.lamda_ri - self.update_lamda_ri(fi_h_plus))
         self.lamda_r = np.maximum(0,self.lamda_r - self.update_lamda_r(f_h_plus))
         self.sample_action_vals.detach_()
-        return g_vec_f, fi_h
+        return g_vec_f, g_x, fi_h

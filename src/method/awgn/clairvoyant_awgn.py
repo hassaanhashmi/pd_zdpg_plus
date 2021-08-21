@@ -1,6 +1,6 @@
 import numpy as np
 
-class Clairvoyant_Policy():
+class ClairvoyantPolicy():
     r"""
     Clairvoyant Policy for AWGN channel
     """

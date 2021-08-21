@@ -97,8 +97,8 @@ class PD_SPG():
           actions = self.get_actions()
           for s in range(self.batch_size):
               #probe 1
-              _, a, b, _ = self.env.step(actions[:,s], self.metrics_x, self.vec_H[:,s])
-              self.fi_h[s], self.f_h[:,s] = np.squeeze(a), np.squeeze(b)
+              g, a, b, _ = self.env.step(actions[:,s], self.metrics_x, self.vec_H[:,s])
+              g_x, self.fi_h[s], self.f_h[:,s] = np.squeeze(g), np.squeeze(a), np.squeeze(b)
           #for plotting
           g_vec_f, _, _, _ = self.env.step(np.mean(actions, axis=1).reshape(-1,1), np.mean(self.f_h, axis=1).reshape(-1,1), self.vec_H)
               #update theta
@@ -113,4 +113,4 @@ class PD_SPG():
           self.lamda_r = np.maximum(0,self.lamda_r - self.update_lamda_r(np.mean(self.f_h, axis=1).reshape(-1,1)))
           del self.saved_log_probs[:]
           fi_h_ = np.mean(self.fi_h)
-          return g_vec_f, fi_h_
+          return g_vec_f, g_x, fi_h_
