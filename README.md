@@ -15,4 +15,3 @@ sudo apt install dvipng
 sudo apt install cm-super
 ```
 <br />
->>>>>>> 0aadc17... Move figures inside src directory
