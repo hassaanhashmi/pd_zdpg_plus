@@ -1,7 +1,7 @@
 # PD-ZDPG+ @ IEEE MLSP 2021
 link to the paper coming soon.
 <div style="text-align:center">
-<img src="src/figures/awgn_multi_plot.png" alt="Overall system architecture for learning representations" width="90% align="middle">
+<img src="src/figures/awgn_multi_plot.png" alt="Performance of all methods on AWGN channel" width="70% align="middle">
 </div>  
 <br /><br />
 
