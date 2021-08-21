@@ -1,8 +1,8 @@
 # PD-ZDPG+ @ IEEE MLSP 2021
 link to the paper coming soon.
-<div style="text-align:center">
+<p align="center">
 <img src="src/figures/awgn_multi_plot.png" alt="Performance of all methods on AWGN channel" width="70% align="middle">
-</div>  
+</p>  
 <br /><br />
 
 Before running the experiments, please clone ```gym-cstr-optim``` from [here](https://github.com/hassaanhashmi/gym-cstr-optim). Afterwards, run the following:
