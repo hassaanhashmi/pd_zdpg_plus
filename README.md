@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# pd_zdpg_plus
-Primal-Dual Zeroth-Order Deterministic Policy Gradients
-=======
 # PD-ZDPG+ @ IEEE MLSP 2021
 link to the paper coming soon.
 <div style="text-align:center">
