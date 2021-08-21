@@ -14,8 +14,8 @@ import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
-from method.mai.pdzdpg_mai import PD_ZDPG
-from method.mai.pdzdpg_p_mai import PD_ZDPG_Plus
+from method.mai.pdzdpg_mai_scale import PD_ZDPG
+from method.mai.pdzdpg_p_mai_scale import PD_ZDPG_Plus
 from plotter.scale_plotter import plotter
 
 matplotlib.rc('text', usetex=True)
