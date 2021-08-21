@@ -35,7 +35,6 @@ class WMMSE_Policy():
             u = (h_diag*v)/(h2.dot(v**2) + self.noise_var)
             w = 1/(1 - u*h_diag*v)
         self.p_wmmse = v**2
-        return self.p_wmmse
 
     def update_policy_sumrate(self, vec_f):
         self.sumrate = np.dot(vec_f.T, self.priority_weights)
@@ -51,7 +50,7 @@ class WMMSE_Policy():
     def step(self):
         metrics_x = np.zeros(shape=(self.num_users,1))
         self.clear_values()
-        p_wmmse = self.update_p_wmmse()
+        self.update_p_wmmse()
         _, _, vec_f, self.vec_H = self.env.step(self.p_wmmse, metrics_x, self.vec_H)
         sumrate = self.update_policy_sumrate(vec_f)
         return sumrate
