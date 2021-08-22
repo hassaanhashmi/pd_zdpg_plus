@@ -3,7 +3,7 @@ import numpy as np
 import torch
 from torch.optim import Adam
 from torch.distributions import Normal
-from model.actor_awgn import Actor
+from model.actor_awgn_stochastic import Actor
 
 
 class PD_SPG():

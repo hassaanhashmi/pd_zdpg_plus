@@ -50,9 +50,7 @@ class PD_ZDPG():
     
     def get_actions_mu(self):
         vec_actions = np.zeros_like(self.vec_H)
-        net_input = torch.from_numpy(self.vec_H.T.astype(np.float64))
-        # temp_policy = type(self.policy)(self.num_users)
-        # temp_policy.load_state_dict(copy.deepcopy(self.policy.state_dict()))
+        net_input = torch.from_numpy(self.vec_H.T.astype(np.float64)).to(self.device)
         temp_policy = copy.deepcopy(self.policy)
         for i, (name, param) in enumerate(temp_policy.named_parameters()):
             if param.requires_grad:
@@ -74,7 +72,7 @@ class PD_ZDPG():
     def update_theta(self, delta_f, delta_fi):
       delta_f_lamd_r = np.dot(delta_f.T, self.lamda_r)[0,0]
       delta_fi_lamd_ri = delta_fi*self.lamda_ri
-      update_step = delta_f_lamd_r + delta_fi_lamd_ri
+      update_step = torch.tensor(delta_f_lamd_r + delta_fi_lamd_ri).to(self.device)
       for i, (name, param) in enumerate(self.policy.named_parameters()):
         if param.requires_grad:
             param.data += self.lr_th*update_step*self.U_r[i]
@@ -87,10 +85,6 @@ class PD_ZDPG():
     def update_lamda_r(self, f_uh):
         update_step = f_uh - self.metrics_x - self.slack
         return self.lr_lr*update_step
-    
-    def render_env(self):
-        #self.env.render()
-        pass #TODO
 
     def reset_env(self):
         self.vec_H = self.env.reset()
@@ -100,7 +94,7 @@ class PD_ZDPG():
         self.metrics_x += self.update_x()
         self.metrics_x = np.maximum(0,self.metrics_x)
         #sample U_s and U_r
-        self.sample_ur()
+        self.sample_gaussian_vectors()
         #get NN outputs
         actions = self.get_actions()
         actions_mu = self.get_actions_mu()

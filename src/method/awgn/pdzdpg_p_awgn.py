@@ -51,7 +51,7 @@ class PD_ZDPG_Plus():
     def get_actions(self):
         net_input = torch.from_numpy(self.vec_H).to(self.device)
         for i, policy in enumerate(self.policies):
-            self.vec_actions[i] = policy(net_input[i]).detach().numpy()
+            self.vec_actions[i] = policy(net_input[i]).cpu().detach().numpy()
         return self.pow_max*self.vec_actions
     
     def get_actions_mu(self):
@@ -71,7 +71,7 @@ class PD_ZDPG_Plus():
         net_in = torch.from_numpy(self.vec_H).to(self.device)
         delta_f_lamd_r = np.dot(delta_f.T, self.lamda_r)[0,0]
         delta_fi_lamd_ri = delta_fi*self.lamda_ri
-        update_step = torch.tensor((delta_f_lamd_r + delta_fi_lamd_ri)*self.U_r)
+        update_step = torch.tensor((delta_f_lamd_r + delta_fi_lamd_ri)*self.U_r).to(self.device)
         for i, policy in enumerate(self.policies):
             out = -1*update_step[i]*self.pow_max*policy(net_in[i])
             self.optimizers[i].zero_grad()

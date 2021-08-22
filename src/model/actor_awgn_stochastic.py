@@ -1,13 +1,13 @@
 import torch.nn as nn
 
 
-class NET(nn.Module):
+class Actor(nn.Module):
     r"""
     Parameterized stochastic local policy φ_μ^i
     """
 
-    def __init__(self, num_inputs):
-        super(NET, self).__init__()
+    def __init__(self):
+        super(Actor, self).__init__()
         self.fc1 = nn.Linear(1, 8).double()
         self.fc2 = nn.Linear(8, 4).double()
         self.fc3 = nn.Linear(4, 2).double() #mean and std outputs

@@ -60,11 +60,12 @@ class PD_ZDPG():
         net_input = torch.from_numpy(self.vec_H)
         temp_policies = copy.deepcopy(self.policies)
         for i, policy in enumerate(temp_policies):
-            for j, (name, param) in enumerate(policy.named_parameters()):
-                if param.requires_grad:
+            with torch.no_grad():
+                for j, (name, param) in enumerate(policy.named_parameters()):
+                  if param.requires_grad:
                     param.data += self.mu_r*self.U_r[i*len(self.U_r)//len(self.policies)+j]
                     dict(policy.named_parameters())[name].data.copy_(param.data)
-            vec_actions[i]=policy(net_input[i])
+                vec_actions[i]=policy(net_input[i])
         return self.pow_max*vec_actions
 
     def delta_fi(self, fi_uh, fi_h):
@@ -94,10 +95,6 @@ class PD_ZDPG():
     def update_lamda_r(self, f_uh):
         update_step = f_uh - self.metrics_x - self.slack
         return self.lr_lr*update_step
-    
-    def render_env(self):
-        #self.env.render()
-        pass #TODO
 
     def reset_env(self):
         self.vec_H = self.env.reset()

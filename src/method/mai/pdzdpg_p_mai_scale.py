@@ -2,7 +2,7 @@ import numpy as np
 import torch
 from torch.optim import SGD
 import gym
-from model.actor_mai import Actor
+from model.actor_scale import Actor
 
 
 class PD_ZDPG_Plus():

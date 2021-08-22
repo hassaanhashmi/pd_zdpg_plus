@@ -26,7 +26,7 @@ class PD_DDPG():
         self.lr_actor = lr_actor
         self.lr_critic = lr_critic
         for i in range(self.num_users):
-            self.actor.append(Actor(1))
+            self.actor.append(Actor())
             self.actor[i].apply(self.init_weights_actor)
             self.actor_params += list(self.actor[i].parameters())
         self.actor_optim = SGD(self.actor_params, lr=self.lr_actor)
