@@ -1,5 +1,5 @@
 # PD-ZDPG+ @ IEEE MLSP 2021
-link to the paper coming soon.
+Link to the paper: https://arxiv.org/abs/2108.10352
 <p align="center">
 <img src="src/figures/awgn_multi_plot.png" alt="Performance of all methods on AWGN channel" width="70% align="middle">
 </p>  
